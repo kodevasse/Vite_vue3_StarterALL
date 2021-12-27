@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const state = {
-  namespaced: true,
   users: [],
 };
 

@@ -1,4 +1,5 @@
 import { createStore, createLogger } from "vuex";
+import UsersModule from "../store/modules/users-module";
 // import user from "./modules/user.js";
 import axios from "axios";
 // import cart from "./modules/cart";
@@ -82,40 +83,40 @@ const customers = {
 // });
 
 // export default store;
-const user = {
-  namespaced: true,
-  state: {
-    users: [],
-  },
+// const user = {
+//   namespaced: true,
+//   state: {
+//     users: [],
+//   },
 
-  getters: {
-    usersList: (state) => state.users,
-  },
+//   getters: {
+//     usersList: (state) => state.users,
+//   },
 
-  actions: {
-    async fetchUsers({ commit }) {
-      const response = await axios.get("http://localhost:3000/users");
-      commit("setUsers", response.data);
-    },
-    async addUsers({ commit }, user) {
-      const response = await axios.post("http://localhost:3000/users", user);
-      commit("addNewUser", response.data);
-    },
-    async deleteUser({ commit }, id) {
-      await axios.delete(`http://localhost:3000/users/${id}`);
-      commit("removeUser", id);
-    },
-  },
+//   actions: {
+//     async fetchUsers({ commit }) {
+//       const response = await axios.get("http://localhost:3000/users");
+//       commit("setUsers", response.data);
+//     },
+//     async addUsers({ commit }, user) {
+//       const response = await axios.post("http://localhost:3000/users", user);
+//       commit("addNewUser", response.data);
+//     },
+//     async deleteUser({ commit }, id) {
+//       await axios.delete(`http://localhost:3000/users/${id}`);
+//       commit("removeUser", id);
+//     },
+//   },
 
-  mutations: {
-    setUsers: (state, users) => (state.users = users),
-    addNewUser: (state, user) => state.users.unshift(user),
-    removeUser: (state, id) => (
-      state.users.filter((user) => user.id !== id),
-      state.users.splice((user) => user.id, 1)
-    ),
-  },
-};
+//   mutations: {
+//     setUsers: (state, users) => (state.users = users),
+//     addNewUser: (state, user) => state.users.unshift(user),
+//     removeUser: (state, id) => (
+//       state.users.filter((user) => user.id !== id),
+//       state.users.splice((user) => user.id, 1)
+//     ),
+//   },
+// };
 
 export default createStore({
   plugins: debug ? [createLogger()] : [],
@@ -124,7 +125,7 @@ export default createStore({
   actions: {},
   modules: {
     customers,
-    user,
+    UsersModule,
   },
   strict: debug,
 });

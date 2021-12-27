@@ -1,32 +1,36 @@
-<script setup>
-import { useStore } from "vuex";
-import { computed, ref } from "vue";
+<script>
+import AddUser from "/src/components/AddUser.vue";
+import { mapGetters, mapActions } from "vuex";
 
-const { state } = useStore();
-// const isLoading = computed(() => state.susers.loading);
-const users = computed(() => state.user.users);
-
-// const notes = computed(() => store.state.notes);
-
-const store = useStore();
-store.dispatch("user/fetchUsers");
+export default {
+  name: "Users",
+  methods: {
+    ...mapActions(["fetchUsers", "deleteUser"]),
+  },
+  computed: mapGetters(["usersList"]),
+  created() {
+    this.fetchUsers();
+  },
+  components: {
+    AddUser,
+  },
+};
 </script>
 
 <template>
-  <div class="">
-    <!-- <span v-if="isLoading">Loading...</span> -->
-    <ul>
-      <li v-for="user in users" :key="user.email">
-        <div class="flex flex-row gap-x-3">
-          <strong class="mt-1">{{ user.name }}</strong>
-          <span class="border-lime-300 border-2 rounded"
-            >({{ user.email }})</span
-          >
-        </div>
-      </li>
-    </ul>
-  </div>
-
+  <ul>
+    <li v-for="user in usersList" :key="user.id">
+      <div class="flex flex-row gap-x-3">
+        <span class="text-teal-300 mt-1"> {{ user.id }}</span>
+        <strong class="mt-1 gap-x-3">{{ user.name }} </strong>
+        <span class="border-lime-300 border-2 rounded">({{ user.email }})</span>
+        <small class="btn btn-error" @click="deleteUser(user.id)"
+          >&#10005;</small
+        >
+      </div>
+    </li>
+  </ul>
+  <AddUser />
   <!-- <div class="overflow-x-auto">
     <table class="table w-full"> 
       <thead>
