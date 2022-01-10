@@ -33,23 +33,10 @@ const notes = computed(() => store.state.notes);
       </li>
     </ul>
     <div
-      class="
-        max-w-screen-xl
-        px-4
-        py-12
-        mx-auto
-        sm:px-6
-        lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between
-      "
+      class="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
     >
       <h2
-        class="
-          text-3xl
-          font-extrabold
-          leading-9
-          tracking-tight
-          sm:text-4xl sm:leading-10
-        "
+        class="text-3xl font-extrabold leading-9 tracking-tight sm:text-4xl sm:leading-10"
       >
         About Page
         <br />
@@ -70,3 +57,17 @@ const notes = computed(() => store.state.notes);
     </div>
   </div>
 </template>
+
+<script setup>
+import { useHead } from "@vueuse/head";
+
+useHead({
+  title: "Website Title",
+  meta: [
+    {
+      name: `description`,
+      content: `Website description`,
+    },
+  ],
+});
+</script>
